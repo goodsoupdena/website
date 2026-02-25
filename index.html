@@ -53,8 +53,10 @@
   nav.scrolled { padding: 0.8rem 0; border-bottom-color: var(--sage-mist); }
   nav .container { display: flex; align-items: center; justify-content: space-between; }
 
-  .nav-logo { text-decoration: none; display: flex; align-items: center; }
-  .nav-logo-img { height: 40px; width: auto; }
+  .nav-logo {
+    font-family: var(--font-display); font-size: 1.4rem;
+    color: var(--olive); text-decoration: none; letter-spacing: -0.01em;
+  }
 
   .nav-links { display: flex; gap: 2.25rem; list-style: none; align-items: center; }
   .nav-links a {
@@ -83,7 +85,7 @@
   /* ─── Hero ─── */
   .hero {
     min-height: 100vh; display: flex; align-items: center;
-    padding-top: 5rem; position: relative; overflow: hidden;
+    padding: 8rem 0 6rem; position: relative; overflow: hidden;
   }
   .hero::before {
     content: ''; position: absolute; top: -20%; right: -10%;
@@ -92,32 +94,44 @@
     opacity: 0.5; pointer-events: none;
   }
 
-  .hero-content { position: relative; z-index: 1; max-width: 700px; }
+  .hero-content {
+    position: relative; z-index: 1;
+    max-width: 800px;
+  }
 
   .hero-label {
     display: inline-flex; align-items: center; gap: 0.5rem;
     font-size: 0.85rem; font-weight: 400; color: var(--olive);
-    letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.75rem;
+    letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 2rem;
     opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
   }
 
   .hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(2.8rem, 5.5vw, 4.2rem);
-    line-height: 1.15; color: var(--charcoal); margin-bottom: 1.5rem;
+    font-size: clamp(3.2rem, 6.5vw, 5rem);
+    line-height: 1.1; color: var(--charcoal); margin-bottom: 1.5rem;
     opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s;
   }
   .hero h1 em { color: var(--olive); font-style: italic; }
 
+  .hero-tagline {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+    color: var(--charcoal-light);
+    font-style: italic;
+    margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.55s;
+  }
+
   .hero-sub {
-    font-size: 1.15rem; line-height: 1.8; color: var(--charcoal-light);
-    max-width: 580px; margin-bottom: 2.5rem;
-    opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s;
+    font-size: 1.1rem; line-height: 1.8; color: var(--charcoal-light);
+    max-width: 540px; margin-bottom: 3rem;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.7s;
   }
 
   .hero-actions {
-    display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
-    opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s;
+    display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.85s;
   }
 
   @keyframes fadeUp {
@@ -484,47 +498,14 @@
     line-height: 1.7; margin-bottom: 1.5rem;
   }
 
-  .contact-form { display: flex; flex-direction: column; gap: 0.85rem; }
-
-  .contact-form input,
-  .contact-form textarea {
-    font-family: var(--font-body);
-    font-size: 0.95rem; font-weight: 300;
-    padding: 0.8rem 1rem;
-    border: 1px solid var(--sage-mist);
-    border-radius: 8px;
-    background: var(--cream);
-    color: var(--charcoal);
-    outline: none;
-    transition: border-color 0.2s;
-    resize: vertical;
-  }
-
-  .contact-form input:focus,
-  .contact-form textarea:focus { border-color: var(--olive); }
-
-  .contact-form input::placeholder,
-  .contact-form textarea::placeholder { color: var(--charcoal-light); opacity: 0.5; }
-
-  .contact-submit { align-self: flex-start; }
-
-  .hp-field {
-    position: absolute; left: -9999px; top: -9999px;
-    width: 1px; height: 1px; opacity: 0;
-    pointer-events: none; tab-index: -1;
-  }
-
-  .form-status { font-size: 0.9rem; min-height: 1.4em; transition: opacity 0.3s; }
-  .form-status.success { color: var(--olive); }
-  .form-status.error { color: var(--terracotta); }
-
   /* ─── Footer ─── */
   footer {
     background: var(--charcoal); color: rgba(247, 243, 237, 0.5); padding: 3.5rem 0;
   }
   .footer-inner { display: flex; justify-content: space-between; align-items: center; }
-  .footer-logo { display: flex; align-items: center; }
-  .footer-logo img { height: 36px; width: auto; opacity: 0.85; }
+  .footer-logo {
+    font-family: var(--font-display); font-size: 1.2rem; color: var(--cream);
+  }
   .footer-tagline { font-size: 0.85rem; color: rgba(247, 243, 237, 0.4); margin-top: 0.25rem; }
   .footer-links { display: flex; gap: 2rem; list-style: none; }
   .footer-links a {
@@ -561,7 +542,8 @@
       background: var(--cream); padding: 1.5rem 2rem;
       border-bottom: 1px solid var(--sage-mist); gap: 1rem;
     }
-    .hero h1 { font-size: 2.2rem; }
+    .hero h1 { font-size: 2.6rem; }
+    .hero-tagline { font-size: 1.15rem; }
     .hero-sub { font-size: 1rem; }
     .section-heading { font-size: 1.8rem; }
     .phase-card { padding: 1.75rem; }
@@ -576,7 +558,7 @@
 <!-- ─── Navigation ─── -->
 <nav id="nav">
   <div class="container">
-    <a href="#" class="nav-logo"><img src="logo.png" alt="Good Soup" class="nav-logo-img"></a>
+    <a href="#" class="nav-logo">Good Soup</a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#pantry-audit">Pantry Audit</a></li>
@@ -595,9 +577,10 @@
   <div class="container">
     <div class="hero-content">
       <p class="hero-label">Fundraising Operations for Nonprofits</p>
-      <h1>Finally, <em>room to breathe.</em></h1>
+      <h1>Your fundraising<br><em>sous chef.</em></h1>
+      <p class="hero-tagline">Finally, room to breathe.</p>
       <p class="hero-sub">
-        Your CRM should work for your team, not against it. Good Soup handles the behind-the-scenes fundraising operations so you can get back to building relationships and raising money.
+        Good Soup handles the behind-the-scenes fundraising operations, the CRM, the data, the systems, so your team can get back to building relationships and raising money.
       </p>
       <div class="hero-actions">
         <a href="https://form.typeform.com/to/OG9YCS9o" target="_blank" rel="noopener" class="btn btn-primary">Apply to work together</a>
@@ -645,7 +628,7 @@
         </p>
         <p class="audit-price">$2,750</p>
         <p class="audit-price-note">One-time · Credited toward your first month if you move into ongoing support</p>
-        <a href="https://form.typeform.com/to/OG9YCS9o" target="_blank" rel="noopener" class="btn btn-audit">Ask about the Pantry Audit</a>
+        <a href="https://form.typeform.com/to/OG9YCS9o" target="_blank" rel="noopener" class="btn btn-audit">Apply for the Pantry Audit</a>
 
         <div class="audit-note">
           <p>
@@ -908,14 +891,7 @@
       <div class="cta-contact">
         <h3 class="contact-heading">Or just say hi</h3>
         <p class="contact-desc">Have a quick question? Not sure if you're ready to apply? Drop me a note and I'll get back to you.</p>
-        <form id="contactForm" class="contact-form">
-          <input type="text" name="name" placeholder="Your name" required>
-          <input type="email" name="email" placeholder="Email" required>
-          <textarea name="message" placeholder="What's on your mind?" rows="3" required></textarea>
-          <input type="text" name="company_url" class="hp-field" tabindex="-1" autocomplete="off">
-          <button type="submit" class="btn btn-secondary contact-submit">Send it</button>
-          <p class="form-status" id="formStatus"></p>
-        </form>
+        <a href="https://form.typeform.com/to/V0LsU5KT" target="_blank" rel="noopener" class="btn btn-secondary">Send me a message</a>
       </div>
     </div>
   </div>
@@ -926,7 +902,7 @@
   <div class="container">
     <div class="footer-inner">
       <div>
-        <div class="footer-logo"><img src="logo.png" alt="Good Soup" style="height: 36px; width: auto; opacity: 0.85;"></div>
+        <div class="footer-logo">Good Soup</div>
         <div class="footer-tagline">Fundraising operations support for nonprofits</div>
       </div>
       <ul class="footer-links">
@@ -1017,77 +993,6 @@
   });
 
   autoplayInterval = setInterval(nextSlide, 6000);
-
-  // Contact form with spam protection
-  const contactForm = document.getElementById('contactForm');
-  const formStatus = document.getElementById('formStatus');
-  const formLoadTime = Date.now();
-
-  contactForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const submitBtn = contactForm.querySelector('.contact-submit');
-    const name = contactForm.name.value.trim();
-    const email = contactForm.email.value.trim();
-    const message = contactForm.message.value.trim();
-    const honeypot = contactForm.company_url.value;
-    const timeElapsed = Date.now() - formLoadTime;
-
-    // Honeypot check
-    if (honeypot) {
-      formStatus.textContent = "Thanks! I'll be in touch soon.";
-      formStatus.className = 'form-status success';
-      contactForm.reset();
-      return;
-    }
-
-    // Time check (under 3 seconds = bot)
-    if (timeElapsed < 3000) {
-      formStatus.textContent = "Thanks! I'll be in touch soon.";
-      formStatus.className = 'form-status success';
-      contactForm.reset();
-      return;
-    }
-
-    submitBtn.textContent = 'Sending...';
-    submitBtn.disabled = true;
-    formStatus.textContent = '';
-    formStatus.className = 'form-status';
-
-    // Replace with your Slack webhook URL
-    const SLACK_WEBHOOK_URL = 'YOUR_SLACK_WEBHOOK_URL_HERE';
-
-    const payload = {
-      text: `🍲 *New message from goodsoupops.com*\n\n*Name:* ${name}\n*Email:* ${email}\n*Message:* ${message}`
-    };
-
-    try {
-      if (SLACK_WEBHOOK_URL === 'YOUR_SLACK_WEBHOOK_URL_HERE') {
-        window.location.href = `mailto:hello@goodsoupops.com?subject=Website inquiry from ${encodeURIComponent(name)}&body=${encodeURIComponent(message + '\n\nFrom: ' + name + ' (' + email + ')')}`;
-        formStatus.textContent = 'Opening your email client...';
-        formStatus.className = 'form-status success';
-      } else {
-        const response = await fetch(SLACK_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        if (response.ok) {
-          formStatus.textContent = "Sent! I'll be in touch soon.";
-          formStatus.className = 'form-status success';
-          contactForm.reset();
-        } else {
-          throw new Error('Webhook failed');
-        }
-      }
-    } catch (err) {
-      formStatus.textContent = "Something went wrong. Try emailing me directly.";
-      formStatus.className = 'form-status error';
-    }
-
-    submitBtn.textContent = 'Send it';
-    submitBtn.disabled = false;
-  });
 </script>
 
 </body>
