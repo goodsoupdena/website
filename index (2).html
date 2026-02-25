@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Good Soup · Fundraising Operations Support for Nonprofits</title>
+<meta name="description" content="Good Soup provides ongoing fundraising operations support for nonprofit teams. CRM systems, data management, donor stewardship workflows, handled so your team can breathe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3ED;
+    --cream-dark: #EDE8DF;
+    --olive: #4A5D3A;
+    --olive-light: #6B7F58;
+    --olive-pale: #E8EDDF;
+    --terracotta: #C4693D;
+    --terracotta-light: #D4845E;
+    --charcoal: #2C2C2C;
+    --charcoal-light: #5A5A5A;
+    --warm-white: #FDFCF9;
+    --sage-mist: #D5DBCA;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Outfit', sans-serif;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--charcoal);
+    background: var(--cream);
+    line-height: 1.7;
+    font-weight: 300;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
+
+  /* ─── Nav ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.25rem 0;
+    background: rgba(247, 243, 237, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s, padding 0.3s;
+  }
+  nav.scrolled { padding: 0.8rem 0; border-bottom-color: var(--sage-mist); }
+  nav .container { display: flex; align-items: center; justify-content: space-between; }
+
+  .nav-logo {
+    font-family: var(--font-display); font-size: 1.4rem;
+    color: var(--olive); text-decoration: none; letter-spacing: -0.01em;
+  }
+
+  .nav-links { display: flex; gap: 2.25rem; list-style: none; align-items: center; }
+  .nav-links a {
+    text-decoration: none; color: var(--charcoal-light);
+    font-size: 0.9rem; font-weight: 400; letter-spacing: 0.01em; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--olive); }
+
+  .nav-cta {
+    background: var(--olive) !important; color: var(--cream) !important;
+    padding: 0.55rem 1.35rem; border-radius: 6px;
+    font-weight: 400 !important; transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--olive-light) !important; }
+
+  .mobile-toggle {
+    display: none; background: none; border: none; cursor: pointer;
+    width: 28px; height: 20px; position: relative;
+    flex-direction: column; justify-content: space-between;
+  }
+  .mobile-toggle span {
+    display: block; height: 2px; width: 100%;
+    background: var(--charcoal); border-radius: 2px; transition: all 0.3s;
+  }
+
+  /* ─── Hero ─── */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 8rem 0 6rem; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -20%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--sage-mist) 0%, transparent 70%);
+    opacity: 0.5; pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative; z-index: 1;
+    max-width: 800px;
+  }
+
+  .hero-label {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.85rem; font-weight: 400; color: var(--olive);
+    letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3.2rem, 6.5vw, 5rem);
+    line-height: 1.1; color: var(--charcoal); margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+  .hero h1 em { color: var(--olive); font-style: italic; }
+
+  .hero-tagline {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+    color: var(--charcoal-light);
+    font-style: italic;
+    margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.55s;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem; line-height: 1.8; color: var(--charcoal-light);
+    max-width: 540px; margin-bottom: 3rem;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.7s;
+  }
+
+  .hero-actions {
+    display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 0.85s;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── Buttons ─── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 1.75rem; border-radius: 6px;
+    font-family: var(--font-body); font-size: 0.95rem; font-weight: 500;
+    text-decoration: none; transition: all 0.25s ease; cursor: pointer; border: none;
+  }
+  .btn-primary { background: var(--olive); color: var(--cream); }
+  .btn-primary:hover {
+    background: var(--olive-light); transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(74, 93, 58, 0.2);
+  }
+  .btn-secondary { background: transparent; color: var(--olive); border: 1.5px solid var(--olive); }
+  .btn-secondary:hover { background: var(--olive); color: var(--cream); }
+  .btn-text { background: none; color: var(--olive); padding: 0.85rem 0; font-weight: 400; }
+  .btn-text:hover { color: var(--terracotta); }
+  .btn-text .arrow { transition: transform 0.2s; display: inline-block; }
+  .btn-text:hover .arrow { transform: translateX(4px); }
+
+  /* ─── Section base ─── */
+  section { padding: 7rem 0; }
+
+  .section-label {
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--terracotta); margin-bottom: 1rem;
+  }
+
+  .section-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    line-height: 1.2; color: var(--charcoal); margin-bottom: 1.25rem;
+  }
+
+  .section-sub {
+    font-size: 1.05rem; color: var(--charcoal-light);
+    max-width: 560px; line-height: 1.8;
+  }
+
+  /* ─── About Dena ─── */
+  .about-me {
+    background: var(--warm-white);
+    border-top: 1px solid var(--sage-mist);
+    border-bottom: 1px solid var(--sage-mist);
+  }
+
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4.5rem; align-items: center;
+  }
+
+  .video-wrapper {
+    border-radius: 12px; overflow: hidden;
+    background: var(--cream-dark); position: relative;
+  }
+  .video-wrapper iframe { border: none; display: block; }
+
+  .about-text p {
+    margin-bottom: 1.25rem; color: var(--charcoal-light);
+    font-size: 1.05rem; line-height: 1.8;
+  }
+
+  /* ─── Pantry Audit ─── */
+  .pantry-audit {
+    background: var(--olive); color: var(--cream);
+    position: relative; overflow: hidden;
+  }
+  .pantry-audit::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(213, 219, 202, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 20% 80%, rgba(196, 105, 61, 0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .audit-content {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: start;
+  }
+
+  .pantry-audit .section-label { color: var(--terracotta-light); }
+  .pantry-audit .section-heading { color: var(--cream); }
+
+  .audit-intro {
+    color: rgba(247, 243, 237, 0.8);
+    font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem;
+  }
+
+  .audit-price {
+    font-family: var(--font-display); font-size: 2rem;
+    color: var(--cream); margin-bottom: 0.35rem;
+  }
+
+  .audit-price-note {
+    font-size: 0.9rem; color: rgba(247, 243, 237, 0.6); margin-bottom: 2rem;
+  }
+
+  .btn-audit { background: var(--terracotta); color: var(--cream); }
+  .btn-audit:hover {
+    background: var(--terracotta-light); transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(196, 105, 61, 0.3);
+  }
+
+  .audit-details h3 {
+    font-family: var(--font-display); font-size: 1.25rem;
+    color: var(--cream); margin-bottom: 1rem; margin-top: 2rem;
+  }
+  .audit-details h3:first-child { margin-top: 0; }
+
+  .audit-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .audit-list li {
+    position: relative; padding-left: 1.25rem;
+    color: rgba(247, 243, 237, 0.8); font-size: 0.95rem; line-height: 1.6;
+  }
+  .audit-list li::before {
+    content: ''; position: absolute; left: 0; top: 0.6em;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--terracotta-light);
+  }
+
+  .audit-note {
+    margin-top: 2.5rem; padding-top: 2rem;
+    border-top: 1px solid rgba(247, 243, 237, 0.1);
+  }
+  .audit-note p {
+    color: rgba(247, 243, 237, 0.55); font-size: 0.9rem;
+    font-style: italic; line-height: 1.7;
+  }
+
+  /* ─── How It Works ─── */
+  .how-it-works { background: var(--cream); }
+  .how-header { text-align: center; margin-bottom: 4.5rem; }
+  .how-header .section-sub { margin: 0 auto; }
+
+  .phases { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+
+  .phase-card {
+    background: var(--warm-white); border: 1px solid var(--sage-mist);
+    border-radius: 12px; padding: 2.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .phase-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(74, 93, 58, 0.08);
+  }
+
+  .phase-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--olive-pale); color: var(--olive);
+    font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 1.25rem;
+  }
+
+  .phase-title {
+    font-family: var(--font-display); font-size: 1.5rem;
+    color: var(--charcoal); margin-bottom: 0.35rem;
+  }
+
+  .phase-timeline {
+    font-size: 0.85rem; color: var(--terracotta); font-weight: 500;
+    margin-bottom: 1.25rem; letter-spacing: 0.02em;
+  }
+
+  .phase-items { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+  .phase-items li {
+    position: relative; padding-left: 1.25rem;
+    color: var(--charcoal-light); font-size: 0.95rem; line-height: 1.6;
+  }
+  .phase-items li::before {
+    content: ''; position: absolute; left: 0; top: 0.6em;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--sage-mist);
+  }
+
+  /* ─── Working Together ─── */
+  .working-together {
+    background: var(--warm-white);
+    border-top: 1px solid var(--sage-mist);
+    border-bottom: 1px solid var(--sage-mist);
+  }
+
+  .wt-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: start;
+  }
+
+  .wt-items { display: flex; flex-direction: column; gap: 1.75rem; }
+  .wt-item h3 {
+    font-family: var(--font-display); font-size: 1.15rem;
+    color: var(--charcoal); margin-bottom: 0.35rem;
+  }
+  .wt-item p { color: var(--charcoal-light); font-size: 0.95rem; line-height: 1.7; }
+
+  /* ─── Testimonial Carousel ─── */
+  .testimonials { background: var(--cream); }
+  .testimonial-carousel { max-width: 700px; margin: 0 auto; text-align: center; }
+  .testimonial-track { position: relative; min-height: 220px; }
+
+  .testimonial-slide {
+    opacity: 0; position: absolute; top: 0; left: 0; right: 0;
+    transition: opacity 0.5s ease; pointer-events: none;
+  }
+  .testimonial-slide.active { opacity: 1; position: relative; pointer-events: auto; }
+
+  .testimonial-quote {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+    line-height: 1.55; color: var(--charcoal);
+    margin-bottom: 1.75rem; font-style: italic;
+  }
+
+  .testimonial-attribution { font-size: 0.9rem; color: var(--charcoal-light); }
+  .testimonial-attribution strong { font-weight: 500; color: var(--charcoal); }
+
+  .testimonial-dots { display: flex; justify-content: center; gap: 0.6rem; margin-top: 2rem; }
+  .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--sage-mist); border: none; cursor: pointer;
+    transition: background 0.3s, transform 0.3s; padding: 0;
+  }
+  .dot.active { background: var(--olive); transform: scale(1.2); }
+  .dot:hover { background: var(--olive-light); }
+
+  /* ─── Investment ─── */
+  .investment {
+    background: var(--warm-white);
+    border-top: 1px solid var(--sage-mist);
+  }
+
+  .investment-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: start;
+  }
+
+  .price-card {
+    background: var(--cream); border: 1px solid var(--sage-mist);
+    border-radius: 12px; padding: 3rem; text-align: center;
+  }
+
+  .price-amount {
+    font-family: var(--font-display); font-size: 3rem;
+    color: var(--olive); line-height: 1; margin-bottom: 0.25rem;
+  }
+  .price-period { font-size: 1rem; color: var(--charcoal-light); margin-bottom: 1.75rem; }
+  .price-detail { font-size: 0.95rem; color: var(--charcoal-light); line-height: 1.7; margin-bottom: 0.75rem; }
+  .price-divider { width: 40px; height: 1px; background: var(--sage-mist); margin: 1.5rem auto; }
+
+  .investment-text p {
+    color: var(--charcoal-light); font-size: 1.05rem;
+    margin-bottom: 1.25rem; line-height: 1.8;
+  }
+
+  /* ─── Good Fit ─── */
+  .fit { background: var(--cream); }
+
+  .fit-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: start;
+  }
+
+  .fit-list { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; }
+  .fit-list li {
+    font-size: 1.05rem; color: var(--charcoal-light); line-height: 1.7;
+    padding-left: 2rem; position: relative;
+  }
+  .fit-list li::before {
+    content: '✓'; position: absolute; left: 0; color: var(--olive); font-weight: 600;
+  }
+
+  .dont-section { margin-top: 3rem; }
+  .dont-heading {
+    font-family: var(--font-display); font-size: 1.15rem;
+    color: var(--charcoal); margin-bottom: 1rem;
+  }
+  .dont-note {
+    font-size: 0.95rem; color: var(--charcoal-light); line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+  .dont-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .dont-list li {
+    font-size: 0.9rem; color: var(--charcoal-light); line-height: 1.5;
+    padding-left: 1.5rem; position: relative;
+  }
+  .dont-list li::before {
+    content: '×'; position: absolute; left: 0;
+    color: var(--sage-mist); font-weight: 600; font-size: 1rem;
+  }
+
+  /* ─── Newsletter ─── */
+  .newsletter {
+    background: var(--warm-white);
+    border-top: 1px solid var(--sage-mist);
+    border-bottom: 1px solid var(--sage-mist);
+  }
+  .newsletter-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+  }
+  .newsletter-desc {
+    font-size: 1.05rem; color: var(--charcoal-light);
+    line-height: 1.8; margin-top: 0.5rem;
+  }
+  .newsletter-embed { display: flex; justify-content: center; }
+
+  /* ─── Connect / Social Cards ─── */
+  .connect { background: var(--cream); }
+
+  .social-cards {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem; margin-top: 2.5rem;
+  }
+
+  .social-card {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0.5rem;
+    padding: 2rem 1.5rem;
+    background: var(--warm-white);
+    border: 1px solid var(--sage-mist);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--charcoal);
+    transition: all 0.25s ease;
+  }
+
+  .social-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(74, 93, 58, 0.1);
+    border-color: var(--olive);
+  }
+
+  .social-card svg { color: var(--olive); margin-bottom: 0.25rem; }
+  .social-card-name { font-weight: 500; font-size: 1rem; color: var(--charcoal); }
+  .social-card-handle { font-size: 0.85rem; color: var(--charcoal-light); }
+
+  /* ─── CTA + Contact ─── */
+  .cta-section {
+    background: var(--warm-white);
+    border-top: 1px solid var(--sage-mist);
+    padding: 7rem 0;
+  }
+
+  .cta-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: start;
+  }
+
+  .cta-apply p {
+    font-size: 1.05rem; color: var(--charcoal-light);
+    line-height: 1.8; margin-bottom: 2rem;
+  }
+
+  .contact-heading {
+    font-family: var(--font-display); font-size: 1.4rem;
+    color: var(--charcoal); margin-bottom: 0.5rem;
+  }
+
+  .contact-desc {
+    font-size: 0.95rem; color: var(--charcoal-light);
+    line-height: 1.7; margin-bottom: 1.5rem;
+  }
+
+  /* ─── Footer ─── */
+  footer {
+    background: var(--charcoal); color: rgba(247, 243, 237, 0.5); padding: 3.5rem 0;
+  }
+  .footer-inner { display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo {
+    font-family: var(--font-display); font-size: 1.2rem; color: var(--cream);
+  }
+  .footer-tagline { font-size: 0.85rem; color: rgba(247, 243, 237, 0.4); margin-top: 0.25rem; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a {
+    color: rgba(247, 243, 237, 0.5); text-decoration: none;
+    font-size: 0.85rem; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--cream); }
+  .footer-social { display: flex; gap: 1.25rem; }
+  .footer-social a { color: rgba(247, 243, 237, 0.5); transition: color 0.2s; }
+  .footer-social a:hover { color: var(--cream); }
+
+  /* ─── Scroll Animations ─── */
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 900px) {
+    .about-grid, .audit-content, .investment-grid, .fit-grid, .phases, .wt-grid, .newsletter-grid, .cta-grid {
+      grid-template-columns: 1fr; gap: 2.5rem;
+    }
+    .social-cards { grid-template-columns: 1fr; }
+    section { padding: 5rem 0; }
+  }
+
+  @media (max-width: 680px) {
+    .nav-links { display: none; }
+    .mobile-toggle { display: flex; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--cream); padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--sage-mist); gap: 1rem;
+    }
+    .hero h1 { font-size: 2.6rem; }
+    .hero-tagline { font-size: 1.15rem; }
+    .hero-sub { font-size: 1rem; }
+    .section-heading { font-size: 1.8rem; }
+    .phase-card { padding: 1.75rem; }
+    .social-cards { grid-template-columns: 1fr; }
+    .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .footer-social { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── Navigation ─── -->
+<nav id="nav">
+  <div class="container">
+    <a href="#" class="nav-logo">Good Soup</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#pantry-audit">Pantry Audit</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#investment">Investment</a></li>
+      <li><a href="https://form.typeform.com/to/OG9YCS9o" target="_blank" rel="noopener" class="nav-cta">Apply to Work Together</a></li>
+    </ul>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ─── Hero ─── -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-content">
+      <p class="hero-label">Fundraising Operations for Nonprofits</p>
+      <h1>Your fundraising<br><em>sous chef.</em></h1>
+      <p class="hero-tagline">Finally, room to breathe.</p>
+      <p class="hero-sub">
+        Good Soup handles the behind-the-scenes fundraising operations, the CRM, the data, the systems, so your team can get back to building relationships and raising money.
+      </p>
+      <div class="hero-actions">
+        <a href="https://form.typeform.com/to/OG9YCS9o" target="_blank" rel="noopener" class="btn btn-primary">Apply to work together</a>
+        <a href="#pantry-audit" class="btn btn-text">Not sure where to start? <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── About Dena ─── -->
+<section class="about-me" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="video-wrapper">
+          <div style="padding:177.78% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1168257768?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Good Soup Development Operations"></iframe></div>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <p class="section-label">Meet Dena</p>
+        <h2 class="section-heading">I've been in your shoes.</h2>
+        <p>
+          I spent years as a fundraiser. I've been the person staring at a CRM that doesn't make sense, manually entering gifts into three different systems, and building workarounds because nobody had time to fix the real problem.
+        </p>
+        <p>
+          Eventually I realized the part of the work I loved most was the operational side: making the systems actually work so fundraisers could do their jobs without fighting their tools every day. That's what Good Soup is.
+        </p>
+        <p>
+          Think of me as your fundraising sous chef. I handle the prep, the infrastructure, the behind-the-scenes work that makes everything else possible. I'm CRM agnostic, so whether you're on Salesforce, Bloomerang, Little Green Light, or something else entirely, I'll meet you where you are.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Pantry Audit ─── -->
+<section class="pantry-audit" id="pantry-audit">
+  <div class="container">
+    <div class="audit-content">
+      <div class="reveal">
+        <p class="section-label">Start Here</p>
+        <h2 class="section-heading">The Pantry Audit</h2>
+        <p class="audit-intro">
+          Something feels off with your data, but you're not sure where to begin. Before you commit to a bigger engagement, get an honest look at what's really going on inside your CRM and a clear path forward.
+        </p>
+        <p class="audit-price">$2,750</p>
+        <p class="audit-price-note">One-time · Credited toward your first month if you move into ongoing support</p>
+        <a href="https://form.typeform.com/to/OG9YCS9o" target="_blank" rel="noopener" class="btn btn-audit">Apply for the Pantry Audit</a>
+
+        <div class="audit-note">
+          <p>
+            This is a diagnostic, not a fix. You'll walk away knowing exactly what needs to happen and in what order, so you can move forward with confidence.
+          </p>
+        </div>
+      </div>
+      <div class="audit-details reveal">
+        <h3>What I look at</h3>
+        <ul class="audit-list">
+          <li>Data quality: duplicates, incomplete records, inconsistent formatting, unused fields</li>
+          <li>Integrations: what's connected, what's broken, what's silently not syncing</li>
+          <li>Reports and dashboards: do they exist, are they being used, are they showing the right things</li>
+          <li>Workflows: how gifts move through your system from received to acknowledged to tracked</li>
+          <li>Team usage: how your staff actually interacts with the system day to day</li>
+        </ul>
+        <h3>What you get</h3>
+        <ul class="audit-list">
+          <li>A plain-language findings report, organized by priority</li>
+          <li>A recorded Loom walkthrough of findings and recommendations</li>
+          <li>Step-by-step DIY guides for your top three recommendations</li>
+          <li>Two weeks of Slack support so you're not figuring it out alone</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── How It Works ─── -->
+<section class="how-it-works" id="how-it-works">
+  <div class="container">
+    <div class="how-header reveal">
+      <p class="section-label">Ongoing Support</p>
+      <h2 class="section-heading">Two phases. One steady hand.</h2>
+      <p class="section-sub">
+        When you're ready for the full engagement, it starts with getting your house in order, then shifts into consistent, reliable ongoing support.
+      </p>
+    </div>
+    <div class="phases">
+      <div class="phase-card reveal">
+        <div class="phase-number">1</div>
+        <h3 class="phase-title">Getting Your House in Order</h3>
+        <p class="phase-timeline">Months 1–2</p>
+        <ul class="phase-items">
+          <li>Audit your CRM to figure out what's working, what's broken, and what's missing</li>
+          <li>Clean up your data and connect your systems so information flows where it should</li>
+          <li>Design and document workflows for gift processing, stewardship, and pipeline tracking</li>
+          <li>Train your team with live sessions, Loom videos, and a knowledge base they'll actually use</li>
+        </ul>
+      </div>
+      <div class="phase-card reveal">
+        <div class="phase-number">2</div>
+        <h3 class="phase-title">Keeping It Running</h3>
+        <p class="phase-timeline">Month 3 and beyond</p>
+        <ul class="phase-items">
+          <li>Monthly strategy call to review what happened, look ahead, and align on priorities</li>
+          <li>Weekly async check-ins so you always know where things stand</li>
+          <li>Ongoing data hygiene, dashboard updates, and integration monitoring</li>
+          <li>Documentation that grows with you as your team and processes evolve</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Working Together ─── -->
+<section class="working-together">
+  <div class="container">
+    <div class="wt-grid">
+      <div class="reveal">
+        <p class="section-label">Working Together</p>
+        <h2 class="section-heading">What it's actually like</h2>
+        <p class="section-sub">You're not hiring a consultant who shows up quarterly with a slide deck. Here's what day-to-day looks like.</p>
+      </div>
+      <div class="wt-items reveal">
+        <div class="wt-item">
+          <h3>You'll hear from me every week</h3>
+          <p>A short async update covers what I worked on, what's in progress, and anything I need from you. No meetings required.</p>
+        </div>
+        <div class="wt-item">
+          <h3>You have a Slack channel</h3>
+          <p>Quick questions get quick answers. You're not waiting for a meeting to get unstuck.</p>
+        </div>
+        <div class="wt-item">
+          <h3>Everything is documented</h3>
+          <p>Every workflow, every process, every change gets captured in Loom walkthroughs and a knowledge base. Nothing lives only in my head.</p>
+        </div>
+        <div class="wt-item">
+          <h3>I leave you better than I found you</h3>
+          <p>If we ever part ways, you get a full transition guide, updated docs, and clean systems. No hostage situations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Testimonials ─── -->
+<section class="testimonials">
+  <div class="container">
+    <p class="section-label" style="text-align: center;">Kind Words</p>
+    <div class="testimonial-carousel reveal">
+      <div class="testimonial-track" id="testimonialTrack">
+        <div class="testimonial-slide active">
+          <p class="testimonial-quote">
+            "Dena has an exceptional ability to quickly pick up information about our organization. She brought clarity and structure to our fundraising operations, training our staff and improving our workflow to build stronger systems that will serve us well beyond a single campaign."
+          </p>
+          <p class="testimonial-attribution">
+            <strong>Bobbi Fabian</strong> · Executive Director
+          </p>
+        </div>
+        <div class="testimonial-slide">
+          <p class="testimonial-quote">
+            "Before working with Dena, I was intimidated by complex CRM systems. She made Salesforce easy to navigate, teaching me how to pull reports, streamline donor touchpoints, and manage grants effectively. Thanks to her guidance, I now feel empowered and more confident as a data-driven fundraiser."
+          </p>
+          <p class="testimonial-attribution">
+            <strong>Patricia (Pat) Dalao</strong> · Institutional Giving Manager
+          </p>
+        </div>
+        <div class="testimonial-slide">
+          <p class="testimonial-quote">
+            "Her curiosity and interest in learning how to improve our organization were invaluable. She instituted new procedures, software, and standards, guiding the organization toward respecting the importance of information: its gathering, its safety, its timeliness, its organization."
+          </p>
+          <p class="testimonial-attribution">
+            <strong>Kristina Afzal</strong> · IT Manager
+          </p>
+        </div>
+      </div>
+      <div class="testimonial-dots" id="testimonialDots">
+        <button class="dot active" aria-label="Testimonial 1"></button>
+        <button class="dot" aria-label="Testimonial 2"></button>
+        <button class="dot" aria-label="Testimonial 3"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Investment ─── -->
+<section class="investment" id="investment">
+  <div class="container">
+    <div class="investment-grid">
+      <div class="reveal">
+        <p class="section-label">The Investment</p>
+        <h2 class="section-heading">Clear terms, no surprises</h2>
+        <div class="investment-text">
+          <p>
+            After the initial six months, the engagement continues month to month. Either side can part ways with 30 days' notice. No long-term lock-in, no awkward renewal conversations. If the work is valuable, you'll want to keep it going.
+          </p>
+          <p>
+            You don't need a full-time hire. You need someone who knows what they're doing, shows up consistently, and makes your infrastructure work for you.
+          </p>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="price-card">
+          <p class="price-amount">$4,000</p>
+          <p class="price-period">per month</p>
+          <div class="price-divider"></div>
+          <p class="price-detail">6-month initial commitment</p>
+          <p class="price-detail">Month-to-month after that</p>
+          <p class="price-detail">30 days' notice to part ways</p>
+          <div class="price-divider"></div>
+          <p class="price-detail" style="font-size: 0.88rem; color: var(--terracotta);">
+            Pantry Audit fee credited toward Month 1
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Good Fit ─── -->
+<section class="fit" id="fit">
+  <div class="container">
+    <div class="fit-grid">
+      <div class="reveal">
+        <p class="section-label">Is This a Fit?</p>
+        <h2 class="section-heading">This might be for you if...</h2>
+
+        <div class="dont-section">
+          <h3 class="dont-heading">What I don't do</h3>
+          <p class="dont-note">
+            I'm your behind-the-scenes operations person, not your frontline fundraiser. I make sure everything runs smoothly so the people doing those things can do them well.
+          </p>
+          <ul class="dont-list">
+            <li>Write appeals or donor communications</li>
+            <li>Run events, campaigns, or grants</li>
+            <li>General IT, custom coding, or graphic design</li>
+            <li>Vendor contract negotiations</li>
+          </ul>
+        </div>
+      </div>
+      <div class="reveal">
+        <ul class="fit-list">
+          <li>You're a small to medium nonprofit with a development team that's stretched thin</li>
+          <li>Your CRM is underperforming and your team is working around it instead of in it</li>
+          <li>You don't have a dedicated operations person keeping things running behind the scenes</li>
+          <li>You want someone who shows up consistently and makes your systems actually work</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Newsletter ─── -->
+<section class="newsletter" id="newsletter">
+  <div class="container">
+    <div class="newsletter-grid reveal">
+      <div>
+        <p class="section-label">Stay in the Loop</p>
+        <h2 class="section-heading">What's Under the Lid</h2>
+        <p class="newsletter-desc">
+          Practical fundraising operations tips, CRM advice, and the occasional behind-the-scenes look at what it takes to keep nonprofit systems running. No spam, no fluff.
+        </p>
+      </div>
+      <div class="newsletter-embed">
+        <iframe src="https://whatsunderthelid.substack.com/embed" width="100%" height="320" style="border: 1px solid var(--sage-mist); border-radius: 8px; background: white;" frameborder="0" scrolling="no"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Connect ─── -->
+<section class="connect" id="connect">
+  <div class="container">
+    <div class="connect-inner reveal">
+      <p class="section-label" style="text-align: center;">Let's Connect</p>
+      <h2 class="section-heading" style="text-align: center;">Find me in the wild</h2>
+      <div class="social-cards">
+        <a href="https://instagram.com/goodsoup.dev" target="_blank" rel="noopener" class="social-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <span class="social-card-name">Instagram</span>
+          <span class="social-card-handle">@goodsoup.dev</span>
+        </a>
+        <a href="https://linkedin.com/in/denavongchanh" target="_blank" rel="noopener" class="social-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          <span class="social-card-name">LinkedIn</span>
+          <span class="social-card-handle">Dena Vongchanh</span>
+        </a>
+        <a href="https://whatsunderthelid.substack.com/" target="_blank" rel="noopener" class="social-card">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span class="social-card-name">Newsletter</span>
+          <span class="social-card-handle">What's Under the Lid</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA + Contact ─── -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="cta-grid reveal">
+      <div class="cta-apply">
+        <h2 class="section-heading">Ready to work together?</h2>
+        <p>
+          Fill out a quick application and I'll be in touch to set up a conversation about what's going on and whether Good Soup is the right fit.
+        </p>
+        <a href="https://form.typeform.com/to/OG9YCS9o" target="_blank" rel="noopener" class="btn btn-primary">Apply to work together</a>
+      </div>
+      <div class="cta-contact">
+        <h3 class="contact-heading">Or just say hi</h3>
+        <p class="contact-desc">Have a quick question? Not sure if you're ready to apply? Drop me a note and I'll get back to you.</p>
+        <a href="https://form.typeform.com/to/V0LsU5KT" target="_blank" rel="noopener" class="btn btn-secondary">Send me a message</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ─── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Good Soup</div>
+        <div class="footer-tagline">Fundraising operations support for nonprofits</div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#pantry-audit">Pantry Audit</a></li>
+        <li><a href="#how-it-works">Services</a></li>
+        <li><a href="https://form.typeform.com/to/OG9YCS9o" target="_blank" rel="noopener">Apply</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="https://instagram.com/goodsoup.dev" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/denavongchanh" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="https://whatsunderthelid.substack.com/" target="_blank" rel="noopener" aria-label="Newsletter">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile nav
+  const toggle = document.getElementById('mobileToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => links.classList.remove('open'));
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        const y = target.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Testimonial carousel
+  const slides = document.querySelectorAll('.testimonial-slide');
+  const dots = document.querySelectorAll('.dot');
+  let currentSlide = 0;
+  let autoplayInterval;
+
+  function goToSlide(index) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = index;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+
+  function nextSlide() {
+    goToSlide((currentSlide + 1) % slides.length);
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      goToSlide(i);
+      clearInterval(autoplayInterval);
+      autoplayInterval = setInterval(nextSlide, 6000);
+    });
+  });
+
+  autoplayInterval = setInterval(nextSlide, 6000);
+</script>
+
+</body>
+</html>
